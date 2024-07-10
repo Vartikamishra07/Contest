@@ -1,0 +1,33 @@
+class Solution {
+public:
+    void generateStrings(string current, int n, vector<string> &results) {
+        if (current.length() == n) {
+            results.push_back(current);
+            return;
+        }
+
+        if (current.back() == '1') {
+            generateStrings(current + '0', n, results);
+            generateStrings(current + '1', n, results);
+        } else {
+            generateStrings(current + '1', n, results);
+        }
+    }
+
+    // Main function to return all valid strings of length n
+    vector<string> validStrings(int n) {
+        vector<string> results;
+
+        if (n == 1) {
+            results.push_back("0");
+            results.push_back("1");
+            return results;
+        }
+
+        generateStrings("0", n, results);
+        generateStrings("1", n, results);
+
+        return results;
+    }
+};
+
